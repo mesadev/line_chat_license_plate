@@ -6,8 +6,9 @@ module.exports.test = async (req, res) => {
 
 module.exports.webhook = async (req, res) => {
     try {
-        let reply_token = req.body.events[0].replyToken
-        let a = await test(reply_token)
+        console.log(req)
+       // let reply_token = req.body.events[0].replyToken
+      //  let a = await test(reply_token)
     } catch (error) {
         console.log(error)
     }
