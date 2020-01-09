@@ -1,3 +1,5 @@
+const request = require('request')
+
 module.exports.test = async (req, res) => {
     let a = await test()
     res.sendStatus(200)
