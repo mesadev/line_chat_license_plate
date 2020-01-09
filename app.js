@@ -5,11 +5,12 @@ const webhook = require('./routes/webhook')
 const fs = require('fs')
 const http = require('http')
 const https = require('https')
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+
 // set express js
 
 const app = express()
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 app.use('/service', services)
 app.use('/webhook', webhook)
 
