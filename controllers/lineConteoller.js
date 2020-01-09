@@ -1,5 +1,5 @@
 module.exports.test = async (req, res) => {
-    let a = test()
+    let a = await test()
     return await res.send(a)
 }
 
