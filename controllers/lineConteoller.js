@@ -1,5 +1,6 @@
 module.exports.test = async (req, res) => {
     let a = await test()
+    res.sendStatus(200)
     return await res.send(a)
 }
 
