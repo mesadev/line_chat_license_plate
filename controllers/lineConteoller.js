@@ -12,7 +12,7 @@ module.exports.webhook = (req, res) => {
     } catch (error) {
         console.log(error)
     }
-    return await res.sendStatus(200)
+    return res.sendStatus(200)
 }
 
 async function test(reply_token) {
