@@ -26,7 +26,7 @@ async function credit(reply_token) {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer {RJXgi+nUMla644UWRoqcIfeZ09O2FjFubsDZShAaYfvk38Akxc8RyE6axssB18UNkKx2Vl/ChTMs/jjuHL7KPBZsCARCmUP/qaetCydyujqLObYmQRpdwb4EQue12Xeeipf/TaXwWOAd2+ KwkbwNrwdB04t89 / 1O/ w1cDnyilFU=}'
     }
-    let body = JSON.stringify({
+    let data = JSON.stringify({
         replyToken: reply_token,
         "messages": [
             {
