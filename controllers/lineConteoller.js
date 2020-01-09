@@ -89,7 +89,7 @@ async function plate(reply_token, imageid) {
             'Cache-Control': 'no-cache',
             Accept: '*/*',
             'User-Agent': 'PostmanRuntime/7.19.0',
-            Authorization: 'Bearer RJXgi+nUMla644UWRoqcIfeZ09O2FjFubsDZShAaYfvk38Akxc8RyE6axssB18UNkKx2Vl/ChTMs/jjuHL7KPBZsCARCmUP/qaetCydyujqLObYmQRpdwb4EQue12Xeeipf/TaXwWOAd2+KwkbwNrwdB04t89 / 1O/ w1cDnyilFU=',
+            Authorization: 'Bearer RJXgi+nUMla644UWRoqcIfeZ09O2FjFubsDZShAaYfvk38Akxc8RyE6axssB18UNkKx2Vl/ChTMs/jjuHL7KPBZsCARCmUP/qaetCydyujqLObYmQRpdwb4EQue12Xeeipf/TaXwWOAd2+KwkbwNrwdB04t89/1O/w1cDnyilFU=',
             'Content-Type': 'application/x-www-form-urlencoded'
         }
     };
@@ -103,16 +103,18 @@ async function plate(reply_token, imageid) {
         })
         .pipe(fs.createWriteStream('./uploads/doodle.jpg'))
     let data = 'dd'
-    request.post('https://api.openalpr.com/v2/recognize_url?recognize_vehicle=1&country=th&secret_key=sk_48d6fdc6d4396542e24da343&return_image=false', {
-        form: {
-            image_url: 'https://mnap.site/'
-        }
-    },
+    request.post('https://api.openalpr.com/v2/recognize_url?recognize_vehicle=1&country=th&secret_key=sk_48d6fdc6d4396542e24da343&return_image=false',
+        {
+            form: {
+                image_url: 'https://mnap.site/'
+            }
+        },
         function (err, httpResponse, body) {
+            console.log(body)
             data = JSON.parse(body).results[0]
             let headers = {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer {RJXgi+nUMla644UWRoqcIfeZ09O2FjFubsDZShAaYfvk38Akxc8RyE6axssB18UNkKx2Vl/ChTMs/jjuHL7KPBZsCARCmUP/qaetCydyujqLObYmQRpdwb4EQue12Xeeipf/TaXwWOAd2+KwkbwNrwdB04t89/ 1O/w1cDnyilFU=}'
+                'Authorization': 'Bearer {RJXgi+nUMla644UWRoqcIfeZ09O2FjFubsDZShAaYfvk38Akxc8RyE6axssB18UNkKx2Vl/ChTMs/jjuHL7KPBZsCARCmUP/qaetCydyujqLObYmQRpdwb4EQue12Xeeipf/TaXwWOAd2+KwkbwNrwdB04t89/1O/w1cDnyilFU=}'
             }
             let body1 = JSON.stringify({
                 replyToken: reply_token,
@@ -120,11 +122,11 @@ async function plate(reply_token, imageid) {
                     {
                         "type": "text",
                         "text": `เลขทะเบียน : ${JSON.parse(body).results[0].plate} \n ยี่ห้อ : ${data.vehicle.make[0].name}\n รุ่น :
-        ${data.vehicle.make_model[0].name} \n ปี : ${data.vehicle.year[0].name} \n สี : ${data.vehicle.color[0].name} \nราคาประเมิน : 400,000 บาท `
+ ${data.vehicle.make_model[0].name} \n ปี : ${data.vehicle.year[0].name} \n สี : ${data.vehicle.color[0].name} \nราคาประเมิน : 400,000 บาท `
                     },
                     {
                         "type": "text",
-                        "text": "ทั้งนี้ เป็นราคาประเมินขั้นต้นเท่านั้น หากต้องการทราบราคาที่ถูกต้อง กรุณาติดต่อได้ที่  ..... "
+                        "text": "ทั้งนี้ เป็นราคาประเมินขั้นต้นเท่านั้น หากต้องการทราบราคาที่ถูกต้อง กรุณาติดต่อได้ที่   . ... หากสนใจให้พิพม์ สนใจ"
                     }
                 ]
             })
