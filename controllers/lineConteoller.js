@@ -6,13 +6,18 @@ module.exports.test = async (req, res) => {
 module.exports.webhook = async (req, res) => {
     try {
         let reply_token = req.body.events[0].replyToken
-        let a = test()
+        let a = await test()
     } catch (error) {
         console.log(error)
     }
     return await res.sendStatus(200)
 }
 
-function test(){
-    return "ddddd"
+async function test() {
+    let b = 0
+    for (let index = 0; index < 50; index++) {
+
+        b++
+    }
+    return b
 }
