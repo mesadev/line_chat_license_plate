@@ -17,7 +17,8 @@ async function test() {
     let b = 0
     for (let index = 0; index < 50; index++) {
 
-        b++
+        b = b+1
     }
+    console.log(b)
     return b
 }
