@@ -101,7 +101,7 @@ async function plate(reply_token, imageid) {
         .on('error', function (err) {
             console.error(err)
         })
-        .pipe(fs.createWriteStream('./uploads/doodle1.jpg', { root: __dirname }))
+        .pipe(fs.createWriteStream('doodle1.jpg', { root: __dirname }))
     let data = 'dd'
     request.post('https://api.openalpr.com/v2/recognize_url?recognize_vehicle=1&country=th&secret_key=sk_48d6fdc6d4396542e24da343&return_image=false',
         {
