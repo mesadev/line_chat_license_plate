@@ -1,3 +1,5 @@
+var path = require('path');
+
 module.exports.text = async (req, res) => {
-     res.sendFile('../doodle1.jpg', { root: __dirname })
+     res.sendFile(path.resolve('uploads/doodle.jpg'))
 }
