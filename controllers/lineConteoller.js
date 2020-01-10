@@ -68,7 +68,7 @@ async function credit(reply_token) {
 }
 
 async function plate(reply_token, imageid) {
-    
+
     try {
         fs.unlinkSync('./uploads/doodle1.jpg', { root: __dirname })
         //file removed
@@ -89,7 +89,7 @@ async function plate(reply_token, imageid) {
             'Cache-Control': 'no-cache',
             Accept: '*/*',
             'User-Agent': 'PostmanRuntime/7.19.0',
-            Authorization: 'Bearer RJXgi+nUMla644UWRoqcIfeZ09O2FjFubsDZShAaYfvk38Akxc8RyE6axssB18UNkKx2Vl/ChTMs/jjuHL7KPBZsCARCmUP/qaetCydyujqLObYmQRpdwb4EQue12Xeeipf/TaXwWOAd2+KwkbwNrwdB04t89/1O/w1cDnyilFU=',
+            Authorization: 'Bearer RJXgi+nUMla644UWRoqcIfeZ09O2FjFubsDZShAaYfvk38Akxc8RyE6axssB18UNkKx2Vl/ChTMs/jjuHL7KPBZsCARCmUP/qaetCydyujqLObYmQRpdwb4EQue12Xeeipf/TaXwWOAd2+ KwkbwNrwdB04t89 / 1O/ w1cDnyilFU=}',
             'Content-Type': 'application/x-www-form-urlencoded'
         }
     };
