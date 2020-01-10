@@ -218,36 +218,40 @@ async function checkid(reply_token, imageid) {
     request(options, function (error, response, body) {
         if (error) throw new Error(error);
     })
-    request
+    var stream = request
         .get(options)
         .on('error', function (err) {
             console.error(err)
         })
         .pipe(fs.createWriteStream(path))
-
-    var options1 = {
-        'method': 'POST',
-        'url': 'http://203.146.102.46:42006/upload',
-        'headers': {
-            'Content-Type': 'multipart/form-data; boundary=--------------------------565635026825644983570673'
-        },
-        'formData': {
-            'image': {
-                'value': fs.createReadStream(path),
-                'options': {
-                    'filename': path,
-                    'contentType': null
+        
+    stream.on('finish', function () {
+        console.log("dddfqwr")
+        var options1 = {
+            'method': 'POST',
+            'url': 'http://203.146.102.46:42006/upload',
+            'headers': {
+                'Content-Type': 'multipart/form-data; boundary=--------------------------565635026825644983570673'
+            },
+            'formData': {
+                'image': {
+                    'value': fs.createReadStream(path),
+                    'options': {
+                        'filename': path,
+                        'contentType': null
+                    }
                 }
             }
-        }
-    };
-    request(options1, function (error, response) {
-        if (error) {
-            console.log(error)
-            throw error
-        }
-        console.log(response.body);
+        };
+        request(options1, function (error, response) {
+            if (error) {
+                console.log(error)
+                throw error
+            }
+            console.log(response.body);
+        });
     });
+
 
 
 }
