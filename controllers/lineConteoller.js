@@ -71,7 +71,7 @@ async function credit(reply_token) {
 async function plate(reply_token, imageid) {
 
     try {
-        fs.unlinkSync('./uploads/doodle1.jpg', { root: __dirname })
+        fs.unlinkSync(path.resolve('uploads/doodle.jpg'))
         //file removed
     } catch (err) {
         console.error(err)
@@ -111,7 +111,6 @@ async function plate(reply_token, imageid) {
             }
         },
         function (err, httpResponse, body) {
-            console.log(body)
             data = JSON.parse(body).results[0]
             let headers = {
                 'Content-Type': 'application/json',
