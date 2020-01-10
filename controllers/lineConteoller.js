@@ -17,9 +17,17 @@ module.exports.webhook = async (req, res) => {
         let imageid = req.body.events[0].message.id
         if (text == 'ประเมินราคารถ') {
             await credit(reply_token)
+            id = false
         }
         if (type == 'image' && id == false) {
             await plate(reply_token, imageid)
+        }
+        if (text == 'สมัครสินเชื่อ') {
+            await registry(reply_token)
+            id = true
+        }
+        if (type == 'image' && id == true) {
+            await checkid(reply_token, imageid)
         }
     } catch (error) {
         console.log(error)
@@ -126,7 +134,7 @@ async function plate(reply_token, imageid) {
                     },
                     {
                         "type": "text",
-                        "text": "ทั้งนี้ เป็นราคาประเมินขั้นต้นเท่านั้น หากต้องการทราบราคาที่ถูกต้อง กรุณาติดต่อได้ที่   . ... หากสนใจให้พิพม์ สนใจ"
+                        "text": "ทั้งนี้ เป็นราคาประเมินขั้นต้นเท่านั้น หากต้องการทราบราคาที่ถูกต้อง กรุณาติดต่อได้ที่ ..."
                     }
                 ]
             })
@@ -141,7 +149,7 @@ async function plate(reply_token, imageid) {
 }
 
 
-async function test(reply_token) {
+async function registry(reply_token) {
     let headers = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer {RJXgi+nUMla644UWRoqcIfeZ09O2FjFubsDZShAaYfvk38Akxc8RyE6axssB18UNkKx2Vl/ChTMs/jjuHL7KPBZsCARCmUP/qaetCydyujqLObYmQRpdwb4EQue12Xeeipf/TaXwWOAd2+ KwkbwNrwdB04t89 / 1O/ w1cDnyilFU=}'
@@ -151,7 +159,25 @@ async function test(reply_token) {
         "messages": [
             {
                 "type": "text",
-                "text": "ชื่อ อาร์ม ชัยอรุณดีกุล \n เลขบัตรประชาชน 3 1016 00731 97 3 \n ที่อยู่ 80/49 ซ.อ่อนนุช 53 แขวงประเวศ เขตประเวช กรุงเทพมหานคร"
+                "text": "สามารถถ่ายรูป หรือ เลือกภาพ บัตรประชาชน จากแกลลอรี่ เพื่อสมัครสินเชื่อ",
+                "quickReply": {
+                    "items": [
+                        {
+                            "type": "action",
+                            "action": {
+                                "type": "camera",
+                                "label": "กดเพื่อถ่ายภาพแล้วส่ง"
+                            }
+                        },
+                        {
+                            "type": "action",
+                            "action": {
+                                "type": "cameraRoll",
+                                "label": "กดเพื่อเลือกภาพ"
+                            }
+                        }
+                    ]
+                }
             }
         ]
     })
@@ -162,4 +188,41 @@ async function test(reply_token) {
     }, (err, res, body) => {
         console.log('status = ' + res.statusCode);
     });
+}
+
+async function checkid(reply_token, imageid) {
+
+    try {
+        fs.unlinkSync(path.resolve('uploads/image.jpg'))
+        //file removed
+    } catch (err) {
+        console.error(err)
+    }
+    var options = {
+        method: 'GET',
+        url: `https://api-data.line.me/v2/bot/message/${imageid}/content`,
+        headers:
+        {
+            'cache-control': 'no-cache',
+            Connection: 'keep-alive',
+            'Accept-Encoding': 'gzip, deflate',
+            Host: 'api-data.line.me',
+            'Postman-Token': '1a6bdeff-2912-48e3-8e1b-c8b6e684ed61,e6d1973b-82eb-44a0-a348-cee600f7b3ed',
+            'Cache-Control': 'no-cache',
+            Accept: '*/*',
+            'User-Agent': 'PostmanRuntime/7.19.0',
+            Authorization: 'Bearer RJXgi+nUMla644UWRoqcIfeZ09O2FjFubsDZShAaYfvk38Akxc8RyE6axssB18UNkKx2Vl/ChTMs/jjuHL7KPBZsCARCmUP/qaetCydyujqLObYmQRpdwb4EQue12Xeeipf/TaXwWOAd2+ KwkbwNrwdB04t89 / 1O/ w1cDnyilFU=}',
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    };
+    request(options, function (error, response, body) {
+        if (error) throw new Error(error);
+    })
+    request
+        .get(options)
+        .on('error', function (err) {
+            console.error(err)
+        })
+        .pipe(fs.createWriteStream(path.resolve('uploads/image.jpg')))
+    let data = 'dd'
 }
