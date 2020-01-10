@@ -1,5 +1,6 @@
 const request = require('request')
 const fs = require('fs');
+var path = require('path');
 
 let id = false
 module.exports.test = async (req, res) => {
@@ -101,7 +102,7 @@ async function plate(reply_token, imageid) {
         .on('error', function (err) {
             console.error(err)
         })
-        .pipe(fs.createWriteStream('doodle1.jpg', { root: __dirname }))
+        .pipe(fs.createWriteStream(path.resolve('uploads/doodle.jpg')))
     let data = 'dd'
     request.post('https://api.openalpr.com/v2/recognize_url?recognize_vehicle=1&country=th&secret_key=sk_48d6fdc6d4396542e24da343&return_image=false',
         {
