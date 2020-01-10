@@ -69,7 +69,7 @@ async function credit(reply_token) {
 
 async function plate(reply_token, imageid) {
     try {
-        fs.unlinkSync('./uploads/doodle.jpg', { root: __dirname })
+        fs.unlinkSync('./uploads/doodle.jpg')
         //file removed
     } catch (err) {
         console.error(err)
@@ -100,7 +100,7 @@ async function plate(reply_token, imageid) {
         .on('error', function (err) {
             console.error(err)
         })
-        .pipe(fs.createWriteStream('./uploads/doodle.jpg', { root: __dirname }))
+        .pipe(fs.createWriteStream('./uploads/doodle.jpg'))
     let data = 'dd'
     request.post('https://api.openalpr.com/v2/recognize_url?recognize_vehicle=1&country=th&secret_key=sk_48d6fdc6d4396542e24da343&return_image=false',
         {
