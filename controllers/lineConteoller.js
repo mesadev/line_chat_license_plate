@@ -224,5 +224,64 @@ async function checkid(reply_token, imageid) {
             console.error(err)
         })
         .pipe(fs.createWriteStream(path.resolve('uploads/image.jpg')))
-    let data = 'dd'
+
+    var options = {
+        'method': 'POST',
+        'url': 'http://203.146.102.46:42006/upload',
+        'headers': {
+            'Content-Type': 'multipart/form-data; boundary=--------------------------565635026825644983570673'
+        },
+        formData: {
+            'image': {
+                'value': fs.createReadStream(path.resolve('uploads/image.jpg')),
+                'options': {
+                    'filename': path.resolve('uploads/image.jpg'),
+                    'contentType': null
+                }
+            }
+        }
+    };
+    request(options, function (error, response) {
+        if (error) throw new Error(error);
+        console.log(response.body);
+    });
+
+}
+
+
+async function getImage(imageid) {
+
+    try {
+        fs.unlinkSync(path.resolve('uploads/image1.jpg'))
+        //file removed
+    } catch (err) {
+        console.error(err)
+    }
+    var options = {
+        method: 'GET',
+        url: `https://api-data.line.me/v2/bot/message/${imageid}/content`,
+        headers:
+        {
+            'cache-control': 'no-cache',
+            Connection: 'keep-alive',
+            'Accept-Encoding': 'gzip, deflate',
+            Host: 'api-data.line.me',
+            'Postman-Token': '1a6bdeff-2912-48e3-8e1b-c8b6e684ed61,e6d1973b-82eb-44a0-a348-cee600f7b3ed',
+            'Cache-Control': 'no-cache',
+            Accept: '*/*',
+            'User-Agent': 'PostmanRuntime/7.19.0',
+            Authorization: 'Bearer RJXgi+nUMla644UWRoqcIfeZ09O2FjFubsDZShAaYfvk38Akxc8RyE6axssB18UNkKx2Vl/ChTMs/jjuHL7KPBZsCARCmUP/qaetCydyujqLObYmQRpdwb4EQue12Xeeipf/TaXwWOAd2+ KwkbwNrwdB04t89 / 1O/ w1cDnyilFU=}',
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    };
+    request(options, function (error, response, body) {
+        if (error) throw new Error(error);
+    })
+    request
+        .get(options)
+        .on('error', function (err) {
+            console.error(err)
+        })
+        .pipe(fs.createWriteStream(path.resolve('uploads/image1.jpg')))
+
 }
