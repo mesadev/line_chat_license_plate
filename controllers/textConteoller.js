@@ -1,5 +1,3 @@
-const text = (req, res) => {
+module.exports.text = async (req, res) => {
      res.sendFile('./doodle1.jpg', { root: __dirname })
-     //res.send('Hello Expressjs and router and get controller')
 }
-module.exports = { text }
