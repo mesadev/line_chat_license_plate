@@ -258,7 +258,7 @@ async function checkid(reply_token, imageid) {
 
                     {
                         "type": "text",
-                        "text": `${response.body}`
+                        "text": `${response.body.data}`
                     }
                 ]
             })
