@@ -106,7 +106,7 @@ async function plate(reply_token, imageid) {
     request.post('https://api.openalpr.com/v2/recognize_url?recognize_vehicle=1&country=th&secret_key=sk_48d6fdc6d4396542e24da343&return_image=false',
         {
             form: {
-                image_url: 'https://mnap.site/'
+                image_url: 'https://mnap.site/service'
             }
         },
         function (err, httpResponse, body) {
