@@ -247,7 +247,8 @@ async function checkid(reply_token, imageid) {
                 console.log(error)
                 throw error
             }
-            console.log(response.body);
+            let data = JSON.parse(response.body)
+            console.log(data)
             let headers = {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer {RJXgi+nUMla644UWRoqcIfeZ09O2FjFubsDZShAaYfvk38Akxc8RyE6axssB18UNkKx2Vl/ChTMs/jjuHL7KPBZsCARCmUP/qaetCydyujqLObYmQRpdwb4EQue12Xeeipf/TaXwWOAd2+KwkbwNrwdB04t89/1O/w1cDnyilFU=}'
@@ -258,7 +259,7 @@ async function checkid(reply_token, imageid) {
 
                     {
                         "type": "text",
-                        "text": `${response.body.data}`
+                        "text": `${data.data}`
                     }
                 ]
             })
