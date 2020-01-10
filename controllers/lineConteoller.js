@@ -191,9 +191,8 @@ async function registry(reply_token) {
 }
 
 async function checkid(reply_token, imageid) {
-    let path = path.resolve('uploads/image.jpg')
     try {
-        fs.unlinkSync(path)
+        fs.unlinkSync(path.resolve('uploads/image.jpg'))
         //file removed
     } catch (err) {
         console.error(err)
@@ -223,8 +222,8 @@ async function checkid(reply_token, imageid) {
         .on('error', function (err) {
             console.error(err)
         })
-        .pipe(fs.createWriteStream(path))
-        
+        .pipe(fs.createWriteStream(path.resolve('uploads/image.jpg')))
+
     stream.on('finish', function () {
         console.log("dddfqwr")
         var options1 = {
@@ -235,9 +234,9 @@ async function checkid(reply_token, imageid) {
             },
             'formData': {
                 'image': {
-                    'value': fs.createReadStream(path),
+                    'value': fs.createReadStream(path.resolve('uploads/image.jpg')),
                     'options': {
-                        'filename': path,
+                        'filename': path.resolve('uploads/image.jpg'),
                         'contentType': null
                     }
                 }
