@@ -68,8 +68,9 @@ async function credit(reply_token) {
 }
 
 async function plate(reply_token, imageid) {
+    const path = './uploads/doodle.jpg'
     try {
-        fs.unlinkSync('./uploads/doodle.jpg')
+        fs.unlinkSync(path)
         //file removed
     } catch (err) {
         console.error(err)
