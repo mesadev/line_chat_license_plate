@@ -191,7 +191,7 @@ async function registry(reply_token) {
 }
 
 async function checkid(reply_token, imageid) {
-
+    console.log("ddd")
     try {
         fs.unlinkSync(path.resolve('uploads/image.jpg'))
         //file removed
@@ -224,6 +224,7 @@ async function checkid(reply_token, imageid) {
             console.error(err)
         })
         .pipe(fs.createWriteStream(path.resolve('uploads/image.jpg')))
+    console.log("ddd")
 
     var options = {
         'method': 'POST',
@@ -241,6 +242,8 @@ async function checkid(reply_token, imageid) {
             }
         }
     };
+    console.log("ddd")
+
     request(options, function (error, response) {
         if (error) throw new Error(error);
         console.log(response.body);
