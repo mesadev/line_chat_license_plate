@@ -225,7 +225,7 @@ async function checkid(reply_token, imageid) {
         .pipe(fs.createWriteStream(path.resolve('uploads/image.jpg')))
 
     stream.on('finish', function () {
-        console.log("dddfqwr")
+        console.log("finish")
         var options1 = {
             'method': 'POST',
             'url': 'http://203.146.102.46:42006/upload',
@@ -248,6 +248,27 @@ async function checkid(reply_token, imageid) {
                 throw error
             }
             console.log(response.body);
+            let headers = {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer {RJXgi+nUMla644UWRoqcIfeZ09O2FjFubsDZShAaYfvk38Akxc8RyE6axssB18UNkKx2Vl/ChTMs/jjuHL7KPBZsCARCmUP/qaetCydyujqLObYmQRpdwb4EQue12Xeeipf/TaXwWOAd2+KwkbwNrwdB04t89/1O/w1cDnyilFU=}'
+            }
+            let body1 = JSON.stringify({
+                replyToken: reply_token,
+                "messages": [
+
+                    {
+                        "type": "text",
+                        "text": `${response.body}`
+                    }
+                ]
+            })
+            request.post({
+                url: 'https://api.line.me/v2/bot/message/reply',
+                headers: headers,
+                body: body1
+            }, (err, res, body) => {
+                console.log('status = ' + res.statusCode);
+            });
         });
     });
 
