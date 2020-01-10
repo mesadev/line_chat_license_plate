@@ -191,9 +191,9 @@ async function registry(reply_token) {
 }
 
 async function checkid(reply_token, imageid) {
-    console.log("ddd")
+    let path = path.resolve('uploads/image.jpg')
     try {
-        fs.unlinkSync(path.resolve('uploads/image.jpg'))
+        fs.unlinkSync(path)
         //file removed
     } catch (err) {
         console.error(err)
@@ -223,31 +223,32 @@ async function checkid(reply_token, imageid) {
         .on('error', function (err) {
             console.error(err)
         })
-        .pipe(fs.createWriteStream(path.resolve('uploads/image.jpg')))
-    console.log("ddd")
+        .pipe(fs.createWriteStream(path))
 
-    var options = {
+    var options1 = {
         'method': 'POST',
         'url': 'http://203.146.102.46:42006/upload',
         'headers': {
             'Content-Type': 'multipart/form-data; boundary=--------------------------565635026825644983570673'
         },
-        formData: {
+        'formData': {
             'image': {
-                'value': fs.createReadStream(path.resolve('uploads/image.jpg')),
+                'value': fs.createReadStream(path),
                 'options': {
-                    'filename': path.resolve('uploads/image.jpg'),
+                    'filename': path,
                     'contentType': null
                 }
             }
         }
     };
-    console.log("ddd")
-
-    request(options, function (error, response) {
-        if (error) throw new Error(error);
+    request(options1, function (error, response) {
+        if (error) {
+            console.log(error)
+            throw error
+        }
         console.log(response.body);
     });
+
 
 }
 
