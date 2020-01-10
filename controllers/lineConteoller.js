@@ -259,7 +259,7 @@ async function checkid(reply_token, imageid) {
 
                     {
                         "type": "text",
-                        "text": `${data.data}`
+                        "text": `ชื่อ : ${data.data.name} \n บัตรประจำตัวประชาชน : ${data.data.cardId} \n วันเกิด : ${data.data.birthday} \n ที่อยู่ : ${data.data.address}`
                     }
                 ]
             })
